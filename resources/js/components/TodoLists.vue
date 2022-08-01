@@ -173,9 +173,11 @@ const updateByPromise = (promiseResult) => {
     height: 100vh;
     background-color: #ffffffad;
 }
+
 .loader.first-loading {
     background-color: #fff;
 }
+
 .footer {
     position: fixed;
     padding: 10px 10px 0 10px;

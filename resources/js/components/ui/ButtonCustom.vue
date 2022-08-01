@@ -1,18 +1,18 @@
 <template>
-	<button class='btn-clean' :title='title'>
-		<slot />
-	</button>
+    <button class='btn-clean' :title='title'>
+        <slot/>
+    </button>
 </template>
 
 <script setup>
 defineProps({
-	title: String
+    title: String
 })
 </script>
 
 <style scoped>
 .btn-clean {
-	border: none;
-	background: transparent;
+    border: none;
+    background: transparent;
 }
 </style>
