@@ -21,7 +21,7 @@
         </template>
 
         <div
-            class='title ms-2 me-auto'
+            class='title ms-2 me-auto my-auto'
             :class='{"title-urgent": isDone && !editMode, "title-edit": editMode}'
             :contenteditable='editMode'
             @click='initEditMode'
@@ -132,8 +132,8 @@ const cancelEdit = (event) => {
 }
 
 .btn-picture {
-    width: 1rem;
-    height: 1rem;
+    width: 2rem;
+    height: 2rem;
 }
 
 .title-urgent {

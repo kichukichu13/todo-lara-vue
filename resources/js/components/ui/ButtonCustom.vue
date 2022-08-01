@@ -1,5 +1,5 @@
 <template>
-    <button class='btn-clean' :title='title'>
+    <button class='btn-clean my-auto' :title='title'>
         <slot/>
     </button>
 </template>
