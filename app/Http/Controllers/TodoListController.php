@@ -72,7 +72,7 @@ class TodoListController extends Controller
 
     private function successJsonWithItems(): JsonResponse
     {
-        return response()->json(self::success(['items' => TodoList::all(['text', 'code', 'isUrgent', 'isDone'])->sortBy('created_at')->toArray()]));
+        return response()->json(self::success(['items' => TodoList::select(['text', 'code', 'isUrgent', 'isDone'])->orderByDesc('id')->get()->toArray()]));
     }
 
     //методы ниже добавил в отдельный хелпер, локально все работало, но на heroku падала ошибка, что он не знает такие функции, поэтому пришлось перенести сюда...
