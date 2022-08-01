@@ -15,7 +15,7 @@ class CreateTodoListsTable extends Migration
     {
         Schema::create('todo_lists', function (Blueprint $table) {
             $table->id();
-            $table->string('text')->unique();
+            $table->string('text');
             $table->string('code')->unique();
             $table->boolean('isUrgent')->default(false);
             $table->boolean('isDone')->default(false);

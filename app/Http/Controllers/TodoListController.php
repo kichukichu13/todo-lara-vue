@@ -16,13 +16,13 @@ class TodoListController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'text' => ['string', 'required', 'unique:todo_lists', 'max:255'],
+            'text' => ['string', 'required', 'max:255'],
         ]);
 
         if ($validator->fails()) return response()->json(['success' => false, 'data' => $validator->errors()->all()]);
 
         $data = $validator->validated();
-        $data['code'] = makeUniqueCode(array_keys(TodoList::all(['code'])->groupBy('code')->toArray()), $data['text']);
+        $data['code'] = makeUniqueCode(array_keys(TodoList::withTrashed()->get(['code'])->groupBy('code')->toArray()), $data['text']);
 
         $todo = TodoList::create($data);
 
@@ -44,7 +44,7 @@ class TodoListController extends Controller
         if (!($item = TodoList::where('code', $code)->first())) return response()->json(['success' => false, 'data' => 'Элемент не найден.']);
 
         $validator = Validator::make($request->all(), [
-            'text' => ['string', 'unique:todo_lists', 'max:255'],
+            'text' => ['string', 'max:255'],
             'isDone' => ['boolean'],
             'isUrgent' => ['boolean'],
         ]);
@@ -58,7 +58,7 @@ class TodoListController extends Controller
         }
 
         if (isset($data['text'])) {
-            $data['code'] = makeUniqueCode(array_keys(TodoList::all(['code'])->groupBy('code')->toArray()), $data['text']);
+            $data['code'] = makeUniqueCode(array_keys(TodoList::withTrashed()->get(['code'])->groupBy('code')->toArray()), $data['text']);
         }
 
         if (!empty($data) && !$item->update($data)) return response()->json(['success' => false, 'data' => 'Не удалось обновить элемент. Попробуйте еще раз.']);

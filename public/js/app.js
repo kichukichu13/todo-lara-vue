@@ -23203,6 +23203,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
 
+    var cancelEdit = function cancelEdit(event) {
+      editMode.value = false;
+      event.target.textContent = props.text;
+    };
+
     var __returned__ = {
       props: props,
       emit: emit,
@@ -23211,6 +23216,7 @@ __webpack_require__.r(__webpack_exports__);
       deleteItem: deleteItem,
       initEditMode: initEditMode,
       doneEdit: doneEdit,
+      cancelEdit: cancelEdit,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       nextTick: vue__WEBPACK_IMPORTED_MODULE_0__.nextTick,
       ButtonCustom: _components_ui_ButtonCustom_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -23625,7 +23631,7 @@ var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_3 = ["contenteditable"];
+var _hoisted_3 = ["contenteditable", "onKeyup"];
 
 var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
@@ -23699,7 +23705,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }]),
     contenteditable: $setup.editMode,
     onClick: $setup.initEditMode,
-    onBlur: $setup.doneEdit
+    onBlur: $setup.doneEdit,
+    onKeyup: [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)($setup.doneEdit, ["enter"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)($setup.cancelEdit, ["esc"])]
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.text), 43
   /* TEXT, CLASS, PROPS, HYDRATE_EVENTS */
   , _hoisted_3), !$setup.editMode ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
@@ -24100,19 +24107,19 @@ __webpack_require__.r(__webpack_exports__);
 
 var todoListGet = function todoListGet() {
   var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return (0,_services_EventServicesSetup__WEBPACK_IMPORTED_MODULE_0__.processing)('/todo/', params, 'get');
+  return (0,_services_EventServicesSetup__WEBPACK_IMPORTED_MODULE_0__.processing)('/todo', params, 'get');
 };
 var todoListAddItem = function todoListAddItem() {
   var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return (0,_services_EventServicesSetup__WEBPACK_IMPORTED_MODULE_0__.processing)('/todo/', params, 'post');
+  return (0,_services_EventServicesSetup__WEBPACK_IMPORTED_MODULE_0__.processing)('/todo', params, 'post');
 };
 var todoListDeleteItem = function todoListDeleteItem(code) {
   var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  return (0,_services_EventServicesSetup__WEBPACK_IMPORTED_MODULE_0__.processing)('/todo/' + code + '/', params, 'delete');
+  return (0,_services_EventServicesSetup__WEBPACK_IMPORTED_MODULE_0__.processing)('/todo/' + code, params, 'delete');
 };
 var todoListEditItem = function todoListEditItem(code) {
   var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  return (0,_services_EventServicesSetup__WEBPACK_IMPORTED_MODULE_0__.processing)('/todo/' + code + '/', params, 'patch');
+  return (0,_services_EventServicesSetup__WEBPACK_IMPORTED_MODULE_0__.processing)('/todo/' + code, params, 'patch');
 };
 
 /***/ }),
@@ -31518,7 +31525,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.title-edit[data-v-65e370bc] {\n    width: 100%;\n    padding: 0 1rem;\n}\n.btn-picture[data-v-65e370bc] {\n\twidth: 1rem;\n\theight: 1rem;\n}\n.title-urgent[data-v-65e370bc] {\n\ttext-decoration: line-through;\n\tcolor: lightgrey;\n}\n.btn-picture.done[data-v-65e370bc] {\n\tfilter: invert(68%) sepia(73%) saturate(315%) hue-rotate(83deg) brightness(90%) contrast(87%);\n}\n.btn-picture.done[data-v-65e370bc]:hover {\n\tfilter: invert(47%) sepia(48%) saturate(465%) hue-rotate(63deg) brightness(91%) contrast(87%);\n}\n.btn-picture.delete[data-v-65e370bc] {\n\tfilter: invert(49%) sepia(46%) saturate(2113%) hue-rotate(324deg) brightness(110%) contrast(106%);\n}\n.btn-picture.delete[data-v-65e370bc]:hover {\n\tfilter: invert(52%) sepia(37%) saturate(1135%) hue-rotate(312deg) brightness(77%) contrast(92%);\n}\n.btn-picture.urgent[data-v-65e370bc] {\n\tfilter: invert(85%) sepia(23%) saturate(7314%) hue-rotate(325deg) brightness(106%) contrast(89%);\n}\n.btn-picture.urgent[data-v-65e370bc]:hover {\n\tfilter: invert(48%) sepia(90%) saturate(308%) hue-rotate(344deg) brightness(93%) contrast(91%);\n}\n.btn-picture.back[data-v-65e370bc] {\n\tfilter: invert(78%) sepia(0%) saturate(94%) hue-rotate(142deg) brightness(86%) contrast(88%);\n\ttransform: scale(-1, 1);\n}\n.btn-picture.back[data-v-65e370bc]:hover {\n\tfilter: invert(36%) sepia(12%) saturate(3%) hue-rotate(317deg) brightness(96%) contrast(88%);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.title-edit[data-v-65e370bc] {\n    width: 100%;\n    padding: 0 1rem;\n}\n.btn-picture[data-v-65e370bc] {\n    width: 1rem;\n    height: 1rem;\n}\n.title-urgent[data-v-65e370bc] {\n    text-decoration: line-through;\n    color: lightgrey;\n}\n.btn-picture.done[data-v-65e370bc] {\n    filter: invert(68%) sepia(73%) saturate(315%) hue-rotate(83deg) brightness(90%) contrast(87%);\n}\n.btn-picture.done[data-v-65e370bc]:hover {\n    filter: invert(47%) sepia(48%) saturate(465%) hue-rotate(63deg) brightness(91%) contrast(87%);\n}\n.btn-picture.delete[data-v-65e370bc] {\n    filter: invert(49%) sepia(46%) saturate(2113%) hue-rotate(324deg) brightness(110%) contrast(106%);\n}\n.btn-picture.delete[data-v-65e370bc]:hover {\n    filter: invert(52%) sepia(37%) saturate(1135%) hue-rotate(312deg) brightness(77%) contrast(92%);\n}\n.btn-picture.urgent[data-v-65e370bc] {\n    filter: invert(85%) sepia(23%) saturate(7314%) hue-rotate(325deg) brightness(106%) contrast(89%);\n}\n.btn-picture.urgent[data-v-65e370bc]:hover {\n    filter: invert(48%) sepia(90%) saturate(308%) hue-rotate(344deg) brightness(93%) contrast(91%);\n}\n.btn-picture.back[data-v-65e370bc] {\n    filter: invert(78%) sepia(0%) saturate(94%) hue-rotate(142deg) brightness(86%) contrast(88%);\n    transform: scale(-1, 1);\n}\n.btn-picture.back[data-v-65e370bc]:hover {\n    filter: invert(36%) sepia(12%) saturate(3%) hue-rotate(317deg) brightness(96%) contrast(88%);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
